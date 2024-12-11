@@ -1,0 +1,33 @@
+{
+    "targets": [
+      {
+        "name": "slack",
+        "inputs": {
+          "url": "{SLACK_WEBHOOK}",
+          "publish": "test-summary-slim"
+        },
+        "extensions": [
+            {
+              "name": "mentions",
+              "inputs": {
+                "users": [
+                  {
+                    "name": "Test",
+                    "slack_uid": "{SLACK_USER}"
+                  }
+                ]
+              }   
+            }
+          ]
+      }
+    ],
+    "results": [
+      {
+        "type": "junit",
+        "files": [
+          "reports/junit.xml"
+        ]
+      }
+    ]
+  }
+  
