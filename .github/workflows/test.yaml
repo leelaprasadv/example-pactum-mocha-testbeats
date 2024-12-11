@@ -18,7 +18,11 @@ jobs:
       run: npm ci
     - name: Run Pactum Mocha tests
       run: npm run test
-    - run: npx testbeats@latest publish --slack ${{ secrets.SLACK_MVP_URL }} --junit reports/junit.xml --ci-info --chart-test-summary
+    - name: Run publish results
+      uses: test-results-reporter/publish@v0
+      with:
+        config: '.testbeats.json'
       if: always()
       env:
-        TEST_BEATS_API_KEY: ${{ secrets.TEST_BEATS_API_KEY }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USER: ${{ secrets.SLACK_USER }}
