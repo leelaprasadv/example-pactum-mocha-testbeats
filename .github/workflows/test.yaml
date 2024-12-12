@@ -20,9 +20,15 @@ jobs:
       run: npm run test
     - name: Run publish results
       uses: test-results-reporter/publish@v0
+      # with:
+      #   config: '.testbeats.json'
+      # if: always()
+      # env:
+      #   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #   SLACK_USER: ${{ secrets.SLACK_USER }}
       with:
-        config: '.testbeats.json'
-      if: always()
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_USER: ${{ secrets.SLACK_USER }}
+        slack: ${{ secrets.SLACK_WEBHOOK }}
+        junit: 'reports/junit.xml'
+        ci-info: true
+        chart-test-summary: true
+        
